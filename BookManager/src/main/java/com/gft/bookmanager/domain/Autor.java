@@ -14,7 +14,7 @@ public class Autor {
 	private Long id;
 	private String nome;
 	
-	public Autor() {}
+	protected Autor() {}
 	
 	public Autor(String nome){
 		this.nome = nome;
