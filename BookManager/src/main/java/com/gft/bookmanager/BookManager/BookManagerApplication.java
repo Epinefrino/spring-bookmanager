@@ -7,12 +7,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.gft.bookmanager.domain.Autor;
 import com.gft.bookmanager.repository.AutorRepository;
 
 @SpringBootApplication
+@ComponentScan({"com.gft.bookmanager.controller"})
 @EntityScan("com.gft.bookmanager.domain")
 @EnableJpaRepositories("com.gft.bookmanager.repository")
 public class BookManagerApplication {

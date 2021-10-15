@@ -10,6 +10,8 @@ import com.gft.bookmanager.domain.Autor;
 public interface AutorRepository extends CrudRepository<Autor, Long> {
 	List<Autor> findByNome(String nome);
 	
+	List<Autor> findAll();
+	
 	Optional<Autor> findById(Long id);
 	
 }
