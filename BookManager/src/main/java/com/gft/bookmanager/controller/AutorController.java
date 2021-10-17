@@ -3,7 +3,6 @@ package com.gft.bookmanager.controller;
 import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -63,7 +62,7 @@ public class AutorController {
 		repository.deleteById(id);
 	}
 	
-	@PatchMapping("/autores/{id}/relaciona/{livroId}")
+	@GetMapping("/autores/{id}/relaciona/{livroId}")
 	Autor associa(@PathVariable Long id, @PathVariable Long livroId) {
 		Autor a = repository.findById(id).orElseThrow(() -> new AutorNotFoundException(id));
 		Livro l = livroRepository.findById(livroId).orElseThrow(() -> new LivroNotFoundException(livroId));
