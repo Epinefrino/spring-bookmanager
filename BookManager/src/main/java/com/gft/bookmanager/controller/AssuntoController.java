@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gft.bookmanager.domain.Assunto;
-import com.gft.bookmanager.domain.Livro;
 import com.gft.bookmanager.exception.AssuntoNotFoundException;
-import com.gft.bookmanager.exception.LivroNotFoundException;
 import com.gft.bookmanager.repository.AssuntoRepository;
-import com.gft.bookmanager.repository.LivroRepository;
 
 @RestController
 public class AssuntoController {

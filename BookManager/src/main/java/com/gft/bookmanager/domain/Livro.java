@@ -9,8 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "livro")
 public class Livro {
 	
 	@Id
@@ -26,13 +29,13 @@ public class Livro {
 	String anoPublicacao;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "livro_autor", joinColumns = @JoinColumn(referencedColumnName = "id", name = "autor_id"),
-	inverseJoinColumns = @JoinColumn(referencedColumnName = "id", name = "livro_id"))
+	@JoinTable(name = "livro_autor", joinColumns = @JoinColumn(referencedColumnName = "id", name = "livro_id"),
+	inverseJoinColumns = @JoinColumn(referencedColumnName = "id", name = "autor_id"))
 	private List<Autor> autores;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "livro_assunto", joinColumns = @JoinColumn(referencedColumnName = "id", name = "assunto_id"),
-	inverseJoinColumns = @JoinColumn(referencedColumnName = "id", name = "livro_id"))
+	@JoinTable(name = "livro_assunto", joinColumns = @JoinColumn(referencedColumnName = "id", name = "livro_id"),
+	inverseJoinColumns = @JoinColumn(referencedColumnName = "id", name = "assunto_id"))
 	private List<Assunto> assuntos;
 	
 	protected Livro() {}
@@ -98,6 +101,25 @@ public class Livro {
 
 	public void setAssuntos(List<Assunto> assuntos) {
 		this.assuntos = assuntos;
+	}
+	
+	@PrePersist
+	public void populaAutores() {
+		if(this.autores!=null) {
+			for(Autor autor : this.autores) {
+				autor.getLivrosEscritos().add(this);
+			}
+		}
+		populaAssuntos();
+	}
+	
+	
+	private void populaAssuntos() {
+		if(this.assuntos!=null) {
+			for(Assunto assunto : this.assuntos) {
+				assunto.getLivros().add(this);
+			}
+		}
 	}
 	
 }

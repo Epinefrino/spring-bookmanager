@@ -7,8 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "autor")
 public class Autor {
 	
 	@Id
@@ -16,6 +20,7 @@ public class Autor {
 	private Long id;
 	private String nome;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "autores")
 	private List<Livro> livrosEscritos;
 	
@@ -67,5 +72,14 @@ public class Autor {
 	@Override
 	public String toString() {
 		return "Autor{"+"id="+this.id+", nome='"+this.nome+'\''+'}';
+	}
+	
+	@PrePersist
+	public void populaLivros() {
+		if(this.livrosEscritos!=null) {
+			for(Livro livro : this.livrosEscritos) {
+				livro.getAutores().add(this);
+			}
+		}
 	}
 }
