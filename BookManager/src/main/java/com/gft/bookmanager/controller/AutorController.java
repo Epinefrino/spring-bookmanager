@@ -38,6 +38,11 @@ public class AutorController {
 		return repository.findById(id).orElseThrow(() -> new AutorNotFoundException(id));
 	}
 	
+	@GetMapping("/autores/nome/{nome}")
+	Autor retornaUmPorNome(@PathVariable String nome) {
+		return repository.findByNome(nome).orElseThrow(() -> new AutorNotFoundException(nome));
+	}
+	
 	@PutMapping("/autores/{id}")
 	Autor substituiAutor(@RequestBody Autor novoAutor, @PathVariable Long id) {
 		return repository.findById(id).map(autor -> {

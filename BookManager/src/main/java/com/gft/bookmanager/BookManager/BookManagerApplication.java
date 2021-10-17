@@ -15,6 +15,7 @@ import com.gft.bookmanager.repository.AutorRepository;
 
 @SpringBootApplication
 @ComponentScan({"com.gft.bookmanager.controller"})
+@ComponentScan({"com.gft.bookmanager.exception"})
 @EntityScan("com.gft.bookmanager.domain")
 @EnableJpaRepositories("com.gft.bookmanager.repository")
 public class BookManagerApplication {

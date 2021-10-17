@@ -1,10 +1,12 @@
 package com.gft.bookmanager.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Autor {
@@ -13,6 +15,9 @@ public class Autor {
 	@GeneratedValue
 	private Long id;
 	private String nome;
+	
+	@ManyToMany(mappedBy = "autores")
+	private List<Livro> livrosEscritos;
 	
 	protected Autor() {}
 	
@@ -36,6 +41,14 @@ public class Autor {
 		this.nome = nome;
 	}
 	
+	public List<Livro> getLivrosEscritos() {
+		return livrosEscritos;
+	}
+
+	public void setLivrosEscritos(List<Livro> livros) {
+		this.livrosEscritos = livros;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if(this == o)
