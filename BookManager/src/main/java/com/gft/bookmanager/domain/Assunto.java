@@ -24,7 +24,13 @@ public class Assunto {
 	@JsonIgnore
 	@ManyToMany(mappedBy = "assuntos")
 	private List<Livro> livros;
-
+	
+	protected Assunto() {}
+	
+	public Assunto(String desc){
+		this.descricao = desc;
+	}
+	
 	public Long getId() {
 		return id;
 	}
